@@ -3,7 +3,7 @@ title: 'Understanding MCP Servers'
 description: 'Learn how Model Context Protocol servers extend GitHub Copilot with access to external tools, databases, and APIs.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-28
+lastUpdated: 2026-09-04
 estimatedReadingTime: '8 minutes'
 tags:
   - mcp
@@ -214,6 +214,14 @@ Some MCP servers require authentication to connect to protected resources. GitHu
 - **`${input:variableName}` prompts**: VS Code will prompt for these values at runtime, keeping secrets out of committed files.
 
 > **Tip**: If your MCP server uses OAuth with Dynamic Client Registration but hosts its authorization metadata at a non-standard URL (as some enterprise servers like Atlassian Rovo do), Copilot CLI handles this automatically.
+
+> **Client ID Metadata Document (CIMD) support** *(v1.0.83+)*: MCP OAuth sign-in now supports CIMD, letting servers resolve client metadata from a hosted document URL instead of requiring manual client registration.
+
+### Resilience and Sub-Agents
+
+- **Surviving server restarts** *(v1.0.82+)*: MCP tools remain callable even after the underlying MCP server process restarts—the CLI reconnects transparently instead of failing outstanding tool calls.
+- **Sub-agent sessions** *(v1.0.83+)*: MCP servers configured by your agent stay available after built-in sub-agent turns complete, so a parent agent's tool access isn't lost when it hands off work to a sub-agent.
+- **Enterprise policy timing** *(v1.0.82+)*: MCP servers blocked by an enterprise managed policy can no longer start before that policy is resolved—server startup now waits for the managed-settings fetch instead of racing it.
 
 ## How Agents Use MCP Tools
 
