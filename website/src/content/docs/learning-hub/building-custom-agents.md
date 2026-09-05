@@ -71,7 +71,17 @@ tools: ['codebase', 'terminal', 'github']
 
 **description** (required): A clear summary of what the agent does. This is shown in the agent picker and helps users find the right agent.
 
-**model** (recommended): The AI model that powers the agent. Choose based on the complexity of the task—use more capable models for nuanced reasoning.
+**model** (recommended): The AI model that powers the agent. Choose based on the complexity of the task—use more capable models for nuanced reasoning. *(v1.0.83+)* You can list several models here, tried in order until one is available to you — useful as a fallback chain when a preferred model is rate-limited or not entitled for a given account:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Expert security auditor'
+model: [Claude Sonnet 5, Claude Sonnet 4, GPT-5.6]
+---
+```
+
+**model-policy** *(v1.0.83+)*: Set to `required` to keep model changes locked to the agent's declared `model` list — users cannot switch the agent to a model outside that list mid-session.
 
 **reasoningEffort** *(v1.0.66+)*: Override the reasoning effort level for this agent. Accepted values are `low`, `medium`, and `high`. This lets you pin specific agents to a cost/quality tradeoff regardless of the user's global setting — for example, a quick code-formatting agent can use `low` effort, while a security reviewer uses `high`:
 
