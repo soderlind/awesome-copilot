@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-06
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -300,6 +300,18 @@ Enable Agent Merge to automate routine PR workflows:
 3. Create a session to implement a feature
 4. When the PR is created, Agent Merge monitors it
 5. It runs CI, waits for reviews, addresses feedback, and merges when ready
+
+### Setting a Persistent Autopilot Goal
+
+*(v1.1.15+)* Use the `/goal` command in a local session to set a persistent objective for autopilot to work toward, instead of relying only on your original prompt. This is useful for longer-running autopilot sessions where the objective needs to stay visible and guide follow-up decisions as the agent works.
+
+### Installing MCP Servers via Deep Link
+
+*(v1.1.15+)* You can now install MCP servers by sharing or opening a deep link. Opening the link shows a prefilled review form summarizing the server's configuration, which you confirm before it's added—useful for onboarding teammates onto a shared set of MCP servers without manual JSON editing.
+
+### Attaching Images and Video to Pull Requests
+
+*(v1.1.15+)* You can paste, drag, or select image and video files to attach them directly to a pull request description, in addition to the existing link-based attachment flow—handy for including before/after screenshots or short recordings in your PR.
 
 ## Next Steps
 

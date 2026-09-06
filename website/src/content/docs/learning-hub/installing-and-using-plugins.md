@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-06
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -250,6 +250,8 @@ Run `/plugin` (or `copilot plugin list` in non-interactive mode) to see **enable
 This opens an interactive list where each installed plugin and its components are shown with a toggle. Disabling a component hides it from Copilot without removing it from disk — useful for temporarily deactivating a hook that is too noisy, or turning off a plugin's instructions when working on a different type of project. Re-enable the component at any time from the same `/plugin` menu.
 
 *(v1.0.81+)* `/plugin` also flags installed plugins and marketplaces that have a newer version available upstream, and offers an **Update** action to pull the latest version directly from the dashboard.
+
+*(v1.0.83+)* Bundled built-in plugins now appear in `/plugin` and other plugin list commands, so you can see everything Copilot ships with alongside your installed marketplace and local plugins. MCP servers contributed by a plugin are also labeled with the plugin they came from (instead of a generic "User" label), and a server from a bundled plugin is shown as built-in.
 
 > **Note**: Enabling and disabling hooks and LSP servers individually is temporarily unavailable following the `/plugins` removal — those toggles previously lived only in the retired dashboard.
 
