@@ -681,6 +681,10 @@ Use `/diagnose` when a session is behaving unexpectedly — it inspects session 
 
 **Worktree switch reliability (v1.0.82+)**: If you start typing a new message while `/worktree` or `/move` is preparing a worktree switch, that message is no longer dropped when the switch completes.
 
+**Multi-model agent fallback (v1.0.83+)**: Custom agents can now list several models in the `model` frontmatter field, tried in order until one is available to you. Combine this with `model-policy: required` to keep model changes locked to that list for the lifetime of the agent, preventing users from switching to an unlisted model mid-session.
+
+**Client ID Metadata Document support (v1.0.83+)**: MCP OAuth sign-in now supports Client ID Metadata Documents (CIMD), broadening compatibility with MCP servers that use this discovery mechanism for OAuth client registration.
+
 The `/ask` command lets you ask a quick question without affecting your conversation history. The current session context is preserved, so you can use it for one-off lookups without derailing an ongoing task. Responses are rendered as full markdown, including tables and formatted links:
 
 ```
@@ -838,6 +842,10 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **Sandbox auth settings** *(v1.0.79-8+, breaking change)*: The `/sandbox` configuration dialog now groups git, `gh`, and (on macOS) keychain settings under a new **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth`/`sandbox.ghAuth` to `sandbox.auth.git`/`sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any saved configuration to the new key names.
 
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
+
+> **Breaking change — sandboxed local network access blocked (v1.0.83+)**: On macOS and Linux, sandboxed commands can no longer reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites and dev servers that bind a local port will fail inside the sandbox until you turn on **Allow local network** in `/sandbox`. If your workflow spins up a local server and then curls it in the same sandboxed session, enable this setting or run that step with `--no-sandbox`.
+
+> **Linux sandbox dependencies (v1.0.83+)**: Linux sandboxing now requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH`. If sandboxed commands suddenly start failing to launch after upgrading, install these packages. Sandboxes also now restrict network egress to the configured proxy in proxy mode, which additionally requires `util-linux` 2.35+ and `/dev/net/tun` access.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 
