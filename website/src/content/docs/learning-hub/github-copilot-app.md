@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-10
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -71,6 +71,10 @@ This makes it easy to dispatch multiple agents and trust they won't interfere wi
 ### Running in the Background
 
 Closing the app's main window keeps it running in the background instead of quitting, with tray (Windows/Linux) or Dock (macOS) support to bring it back. This means scheduled automations and in-progress sessions keep running even when the window isn't open.
+
+### Tracking Sessions from the Composer
+
+The **Goal pill** in the message composer *(v1.1.17+)* shows the live status (Active, Paused, Done) of the objective an agent is working toward, and expands to show the full objective text, a completion summary, pause reason, turn count, and AI Credits usage—so you can check on progress without leaving the composer. Open app settings directly from the same composer with the **`/settings`** slash command *(v1.1.16+)*.
 
 ### Canvases
 
