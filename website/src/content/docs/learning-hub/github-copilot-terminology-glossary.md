@@ -3,7 +3,7 @@ title: 'GitHub Copilot Terminology Glossary'
 description: 'A quick reference guide defining common GitHub Copilot and platform-specific terms.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-11
 estimatedReadingTime: '8 minutes'
 tags:
   - glossary
@@ -258,6 +258,20 @@ A feature available in both the GitHub Copilot app and VS Code's Agents window (
 **Learn more**: [Getting Started with the GitHub Copilot app](../github-copilot-app/)
 
 **Related terms**: [Coding Agent](#coding-agent), [Agent](#agent)
+
+---
+
+### Automations (VS Code)
+
+*(v1.137+, Preview)* Recurring agent tasks in VS Code's Agents window, scheduled to run hourly, daily, weekly, or on demand—mirroring the Automations feature already available in the GitHub Copilot app. Start from a built-in template (catching up on changes, triaging issues, finding bugs) or define your own prompt and schedule. Enable with `setting(chat.automations.enabled)`.
+
+**Example**: Scheduling a daily automation that triages new issues opened overnight and applies labels before you start your day.
+
+**When to use**: For routine work you'd otherwise run manually and repeatedly, such as periodic issue triage, dependency update summaries, or bug sweeps.
+
+**Learn more**: [Using Automations in the GitHub Copilot app](../using-automations-in-copilot-app/)
+
+**Related terms**: [Agent](#agent), [Hook](#hook)
 
 ---
 
