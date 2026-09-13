@@ -255,6 +255,19 @@ This opens an interactive list where each installed plugin and its components ar
 
 > **Dashboard available to everyone (v1.0.81+)**: The plugins dashboard (`/plugin`, `/mcp`, and `/skills`) is now on for all users by default. If you need to opt out, set `PLUGINS_DASHBOARD=false`, which also restores the legacy `copilot plugins` command. This opt-out was later removed in the same release, along with the legacy skills picker it kept alive — `/skills`, bare `/mcp`, and `/mcp show` (with no server name) always open the dashboard now, and `/mcp config` opens the dedicated MCP wizard.
 
+> **Per-kind CLI commands replace cross-kind flags (v1.0.84+)**: The legacy `copilot plugins` command with its cross-kind `--kind`, `--scope`, `--mcp`, and `--skill` flags is being phased out in favor of dedicated per-kind commands:
+>
+> ```bash
+> copilot instruction list              # replaces: copilot plugins list --kind instruction
+> copilot lsp list                      # replaces: copilot plugins list --kind lsp
+> copilot skill add ./my-skill/ --project  # replaces: copilot plugins install --skill --scope project
+> copilot plugin enable my-plugin       # replaces: copilot plugins enable --plugin
+> copilot mcp enable my-server          # replaces: copilot plugins enable --mcp
+> copilot skill disable my-skill        # replaces: copilot plugins disable --skill
+> ```
+>
+> `enable` and `disable` subcommands are now available directly on `copilot plugin`, `copilot mcp`, and `copilot skill`. `copilot plugin list` now reports only plugins (not MCP servers, skills, instructions, or LSP servers), and `copilot plugin list --json` emits a flat array instead of the older `{ plugins, errors }` object — update any scripts that parsed the `.plugins` field. `--json` output is also now available on `copilot plugin marketplace list` and `copilot plugin marketplace browse`.
+
 ### Loading Plugins from a Local Directory
 
 You can load plugins directly from a local directory without installing them from a marketplace, using the `--plugin-dir` flag when starting Copilot:

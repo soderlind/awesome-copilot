@@ -85,6 +85,23 @@ tools: ['codebase', 'terminal', 'github']
 ---
 ```
 
+**Multiple fallback models** *(v1.0.83+)*: The `model` field can also accept a list of models instead of a single value. The CLI tries each model in order until it finds one available to you — useful when an agent's preferred model is occasionally rate-limited or temporarily unavailable:
+
+```yaml
+---
+name: 'Security Reviewer'
+description: 'Expert security auditor for OWASP vulnerabilities'
+model:
+  - Claude Opus 5
+  - Claude Sonnet 4.6
+  - GPT-5
+model-policy: required
+tools: ['codebase', 'terminal', 'github']
+---
+```
+
+**model-policy** *(v1.0.83+)*: Set to `required` to keep the session's model constrained to the agent's `model` list even if the user tries to change models mid-session. This is useful for agents that depend on capabilities only available in specific models (e.g., very high reasoning effort or a particular context window size).
+
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
 | Tool | Purpose |
