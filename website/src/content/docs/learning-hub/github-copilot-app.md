@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-14
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -82,6 +82,10 @@ Closing the app's main window keeps it running in the background instead of quit
 
 For a hands-on guide to building canvases with `/create-canvas`, see [Working with Canvas Extensions](../working-with-canvas-extensions/).
 
+### Files Tab and Generated Artifacts
+
+The **Files tab** shows repository files alongside artifacts an agent generates during a session, such as Markdown reports or summaries. A source switcher *(v1.1.17+)* lets you move between generated artifacts and any added file or folder sources without leaving the tab, keeping your selection as you switch. As of *(v1.1.20+)*, generated Markdown artifacts open directly in the Files tab with the same switcher, and you can promote an artifact into the repository if you want to keep it as a tracked file.
+
 ### Customize
 
 **Customize** *(v1.1.13+)* is a single place in the Copilot app to browse and manage everything that extends your agents: plugins, skills, MCP servers, and canvases. Instead of hunting through separate settings pages, open **Customize** to:
@@ -108,6 +112,12 @@ Agent Merge also understands **stacked pull requests**: it shows a stack summary
 ### Requesting Code Reviews
 
 From the app, you can request a Copilot code review on a pull request—and re-request a review even from reviewers who already responded—without leaving the session. This keeps the review loop inside the same workspace where the change was made.
+
+### Managing Issues and Pull Requests Inline
+
+You can now edit issue and pull request titles and descriptions, and edit, delete, or hide comments directly from the app *(v1.1.18+)*, with an edited indicator shown on changed comments. Pull request fix buttons gained a **Fix with instructions** option so you can add guidance before running a fix, instead of only accepting the default behavior.
+
+When an agent delegates work to multiple chats in the same session, a **Chats pill** above the composer *(v1.1.18+)* shows unread and input-required status across those chats, with quick navigation to jump straight to the one that needs your attention.
 
 ## Who is the Copilot app for?
 
