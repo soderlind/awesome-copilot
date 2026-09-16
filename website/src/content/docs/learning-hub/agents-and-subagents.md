@@ -3,7 +3,7 @@ title: 'Agents and Subagents'
 description: 'Learn how delegated subagents differ from primary agents, when to use them, and how to launch them in VS Code and Copilot CLI.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-16
 estimatedReadingTime: '9 minutes'
 tags:
   - agents
@@ -199,6 +199,10 @@ If you share agent files across surfaces, document those differences so users kn
 When an agent delegates work to multiple chats, VS Code's **Agents window** now shows those chats as children of their parent session in the sessions list, so you can see which chats belong together instead of managing a flat list of unrelated sessions. Each chat row shows its own title, status, and pending approvals. A delegated request also includes a source link (for example **Sent by another session**) so you can jump straight back to whichever session or chat initiated it.
 
 This pairs with **improved workspace resolution**: agents can resolve a workspace by project name (for example, "run this in the vscode workspace") in addition to absolute paths, which simplifies prompts that hand off work across multiple repositories.
+
+**Creating pull requests from agent sessions (v1.138+)**: The Agents window can now generate a pull request directly from a completed Agent Host session using one form — review and edit the generated title and description, choose draft status, and configure merge options before creating the PR or handing the request back to the agent. This complements the experimental **Agent Merge** flow for resolving conflicts across delegated sessions.
+
+**Session organization (v1.138+, Preview)**: The Agents window can suggest marking a session as **Done** once all of its pull requests have merged, with optional automatic cleanup settings to mark stale merged sessions as done or delete them after a grace period. A companion application badge (macOS dock, Linux launcher, Windows taskbar) highlights sessions that need your attention — new results, pending input requests, or failing pull request checks — so you don't have to keep VS Code in the foreground to notice.
 
 ## Common questions
 
