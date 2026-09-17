@@ -291,4 +291,16 @@ A VS Code component (v1.136+) that lets multiple VS Code windows connect to the 
 
 ---
 
+### Agent Sessions in Dev Containers
+
+A VS Code Agents window feature (v1.138+, setting `chat.agentHost.devContainer.enabled`) that runs an agent session inside a local folder's Dev Container instead of on your host machine. The agent gets the exact toolchain and dependencies configured for the project rather than whatever happens to be installed locally. When enabled, folders with a supported Dev Container configuration show a **Use Dev Container** action; Docker must be installed to use it.
+
+**Example**: Running an agent session against a repository whose Dev Container pins a specific Node.js and database version, so the agent's builds and tests match CI exactly.
+
+**When to use**: When your project depends on a specific toolchain version, system libraries, or services that differ from your local machine setup.
+
+**Related terms**: [Agent Host](#agent-host)
+
+---
+
 **Have a term you'd like to see added?** Contributions are welcome! See our [Contributing Guidelines](https://github.com/github/awesome-copilot/blob/main/CONTRIBUTING.md) for how to suggest additions to this glossary.
