@@ -3,7 +3,7 @@ title: 'Building Custom Agents'
 description: 'Learn how to create specialized GitHub Copilot agents with custom personas, tool integrations, and domain expertise.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-20
 estimatedReadingTime: '10 minutes'
 tags:
   - agents
@@ -95,6 +95,20 @@ reasoningEffort: high
 tools: ['codebase', 'terminal', 'github']
 ---
 ```
+
+**include-custom-instructions** *(v1.0.86+)*: By default, custom agents run with a clean slate and do not automatically inherit repository instruction files. Set `include-custom-instructions: true` in the frontmatter to have the agent also load `AGENTS.md`, `copilot-instructions.md`, and `CLAUDE.md` from the repository, layering the agent's persona on top of your team's shared coding standards:
+
+```yaml
+---
+name: 'API Design Reviewer'
+description: 'Reviews API designs for consistency with team conventions'
+model: Claude Sonnet 4
+include-custom-instructions: true
+tools: ['codebase', 'github']
+---
+```
+
+This is useful when an agent's guidance should extend, rather than replace, your repository's existing instructions — for example, a specialized reviewer that still needs to know your team's general style rules.
 
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
@@ -265,13 +279,15 @@ The agent can then query your database, analyze query plans, and suggest optimiz
 
 | Scenario | Recommended Model |
 |----------|-------------------|
-| Most demanding reasoning, security review | Claude Sonnet 5 *(v1.0.67+)* |
+| Most demanding reasoning, security review | Claude Sonnet 5 *(v1.0.67+)*, GPT-6 Astra *(v1.0.85+)* |
 | Complex reasoning, analysis | Claude Sonnet 4 |
 | Code generation, tool-driven agentic work | GPT-5.6 *(v1.0.70+)* |
 | Code generation, refactoring | GPT-4.1 |
 | Code-specialized tasks, large context | kimi-k2.7-code *(v1.0.68+)*, kimi-k3 *(v1.0.79+)* |
 | Quick analysis, simple tasks | Claude Haiku or GPT-4.1-mini |
 | Large codebase understanding | Models with larger context windows |
+
+> **Auto model tiers**: Rather than pinning `model` to a specific name, you can leave it on **Auto** and let Copilot pick a model per request. VS Code's model picker now exposes an **Optimize for** control with **Efficiency**, **Balance**, and **Intelligence** tiers so you can bias Auto's selection toward cost, speed, or capability without hardcoding a model name in agent frontmatter.
 
 ### Organizing Agents in Your Repository
 
