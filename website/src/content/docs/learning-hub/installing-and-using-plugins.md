@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-20
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -254,6 +254,8 @@ This opens an interactive list where each installed plugin and its components ar
 > **Note**: Enabling and disabling hooks and LSP servers individually is temporarily unavailable following the `/plugins` removal — those toggles previously lived only in the retired dashboard.
 
 > **Dashboard available to everyone (v1.0.81+)**: The plugins dashboard (`/plugin`, `/mcp`, and `/skills`) is now on for all users by default. If you need to opt out, set `PLUGINS_DASHBOARD=false`, which also restores the legacy `copilot plugins` command. This opt-out was later removed in the same release, along with the legacy skills picker it kept alive — `/skills`, bare `/mcp`, and `/mcp show` (with no server name) always open the dashboard now, and `/mcp config` opens the dedicated MCP wizard.
+
+> **`copilot plugins` retired in favor of per-kind commands (v1.0.85+)**: The generic `copilot plugins` CLI group has been split into dedicated per-kind commands. `copilot instruction list` and `copilot lsp list` replace `copilot plugins list --kind instruction` / `--kind lsp`, and `enable`/`disable` subcommands were added directly to `copilot plugin`, `copilot mcp`, and `copilot skill`, replacing `copilot plugins enable/disable --plugin|--mcp|--skill`. The cross-kind `--kind`, `--scope`, `--mcp`, and `--skill` flags have been removed from `copilot plugins` entirely — use `copilot mcp` and `copilot skill` instead. `copilot plugins install --skill [--scope project]` is replaced by `copilot skill add [--project]` (the `--scope` spelling is gone). `copilot plugins list` is now just an alias of `copilot plugin list`, and its `--json` output changed from a cross-kind `{ plugins, errors }` object to a flat array of plugins — update any scripts that read the `.plugins` field.
 
 ### Loading Plugins from a Local Directory
 
