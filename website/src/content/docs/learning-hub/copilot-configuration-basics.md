@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-09-22
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -455,6 +455,10 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Session-scoped model selection** *(v1.0.79+)*: `/model` now changes the model for the **current session only** by default. Use `/config model` to set the default model for future sessions — previously `/model` changed both at once, which made it easy to accidentally change your global default while just trying something out in one session.
 
+**`/config` sidebar** *(v1.0.85+)*: The `/config` command opens a dedicated sidebar configuration screen inside the CLI, giving you a persistent panel for browsing and editing settings alongside your active conversation rather than a modal dialog.
+
+**GPT-6 Astra** *(v1.0.85+)*: GitHub Copilot CLI added support for GPT-6 Astra, joining GPT-5.6 and GPT-4.1 in the model picker.
+
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
 **Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **Claude Fable 5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
@@ -879,6 +883,24 @@ copilot --config-dir ~/.my-copilot-config
 ```
 
 Set `COPILOT_HOME` in your shell profile to use a custom config directory across all sessions. This is especially useful when running multiple Copilot configurations for different projects or teams.
+
+### Editing Experience and Transcript Display
+
+**Vim mode** *(v1.0.85+)*: Vim-style modal editing in the composer is available to everyone. Turn it on with `/vim`, or set `editorMode` to `vim` in `/settings` to enable it by default:
+
+```
+/vim
+```
+
+The current mode (normal or insert) is shown while you type, so you always know which editing mode is active.
+
+**Concise transcript view** *(v1.0.85+)*: Set `transcriptView` to `"concise"` in `/settings` to group tool activity into expandable work summaries instead of showing every tool call inline. This keeps long sessions with many tool invocations easier to scan — expand a summary only when you need to inspect the details.
+
+**Context management tools** *(v1.0.85+)*: Opt in from `/settings` to give agents and subagents dedicated context management tools, letting them manage their own context window more explicitly during long-running tasks.
+
+### Session and Memory Import
+
+*(v1.0.85+)* GitHub Copilot CLI supports session and memory import commands for the semantic JSONL interchange format, letting you bring conversation history or memory records from compatible external tools into a Copilot CLI session.
 
 ### Shell Completion
 

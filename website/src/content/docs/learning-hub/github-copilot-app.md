@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-22
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -44,11 +44,13 @@ The key difference from existing Copilot experiences is that the app is purpose-
 The central hub of the Copilot app is the **My Work** view. This dashboard shows:
 
 - **Active sessions**: Each agent working on a task gets its own isolated session
-- **Issues and PRs**: Your inbox of work items from connected repositories
+- **Issues and PRs**: Your inbox of work items from connected repositories, now split into separate **Issues** and **Pull requests** sections in the sidebar and navigation *(v1.1.23+)*, with repositories browsable as dedicated pages
 - **Background automations**: Tasks running in the background, like Agent Merge handling your pull requests
 - **Overall status**: A quick overview of what's in progress, what's done, and what's blocked
 
 Instead of checking GitHub, your CLI, and VS Code for updates, everything is in one place.
+
+**AI-assisted filtering** *(v1.1.23+)*: In My Work's Add filter menu, describe the results you want in plain language and get a generated filter you can inspect, edit, or revert—instead of manually building filter conditions. If the AI filtering can't turn your request into filters, you can continue in a session with your original request and repository prefilled.
 
 ### Automations
 
@@ -67,6 +69,16 @@ Each session the Copilot app creates runs in its own **git worktree**—a real, 
 - A **Worktree location** setting in Settings > Sessions lets you customize where new worktrees are created, using a path template with repository, branch, and name placeholders
 
 This makes it easy to dispatch multiple agents and trust they won't interfere with each other.
+
+### Local Sandbox for Agent Shell Commands
+
+**Local sandbox** *(v1.1.23+)* lets you run an agent's shell commands in a sandbox restricted to the session's workspace, instead of the agent's full local filesystem and network access. Enable it via a project setting or with the `/sandbox` command in a session:
+
+```
+/sandbox
+```
+
+This adds a layer of defense-in-depth for local sessions—useful when running agents against untrusted prompts or third-party repositories, similar in spirit to the sandboxing already available in Copilot CLI.
 
 ### Running in the Background
 
