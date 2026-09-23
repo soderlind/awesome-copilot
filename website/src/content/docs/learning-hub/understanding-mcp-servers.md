@@ -3,7 +3,7 @@ title: 'Understanding MCP Servers'
 description: 'Learn how Model Context Protocol servers extend GitHub Copilot with access to external tools, databases, and APIs.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-23
 estimatedReadingTime: '8 minutes'
 tags:
   - mcp
@@ -93,6 +93,8 @@ Example `.mcp.json` or `.vscode/mcp.json`:
 ```
 
 > **Protocol update (v1.0.81+)**: GitHub Copilot CLI, the SDK, IDE integrations, and in-memory clients now support the **MCP 2026-07-28 specification**, keeping compatibility current with the latest Model Context Protocol servers as they adopt the new spec revision.
+
+> **Per-server slow-connection thresholds (v1.0.87+)**: Configure `slowConnectionThresholdMs` on individual MCP server entries to control how long the CLI waits before warning that a server is slow to connect. This is useful for servers that are known to have a longer, but expected, startup time — raise the threshold to avoid noisy warnings, or lower it to catch regressions earlier.
 
 ### Installing MCP Servers from the Registry
 
