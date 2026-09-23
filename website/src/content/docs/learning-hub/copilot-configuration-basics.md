@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-09-23
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -457,7 +457,9 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
-**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **Claude Fable 5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
+**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), **Claude Fable 5.1** (v1.0.83+), and **GPT-6 Astra** (v1.0.85+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
+
+**Auto routing tier policy** *(v1.0.87+)*: Organisations can now set a startup default for the **Auto** routing tier and enforce it with a strict (non-overridable) or user-overridable policy. This gives enterprises control over whether members can opt out of server-side model routing, similar to other managed settings.
 
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
@@ -604,6 +606,8 @@ Unlike `/worktree` (which keeps the current conversation), `/new-worktree` is th
 ```
 /worktree new my-feature-branch
 ```
+
+**`worktreePathTemplate` setting** *(v1.0.87+)*: Customize exactly where `/worktree`, `/move`, `/new-worktree`, and the `--worktree` startup flag create new worktrees, using placeholders `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Set this in your config if you want worktrees organised differently than the default `<repo>.worktrees/` layout — for example, grouping them by branch name under a shared parent directory.
 
 The `/every` command (also available as `/loop` since v1.0.64) schedules a recurring prompt to run automatically at a specified interval. The companion `/after` command runs a prompt once after a specified delay. Both are useful for self-paced automation — polling for results, periodically summarizing progress, or triggering other slash commands on a timer:
 
@@ -879,6 +883,10 @@ copilot --config-dir ~/.my-copilot-config
 ```
 
 Set `COPILOT_HOME` in your shell profile to use a custom config directory across all sessions. This is especially useful when running multiple Copilot configurations for different projects or teams.
+
+**Vim mode** *(v1.0.85+)*: A full Vim-style editing mode is now available to everyone in the CLI's prompt input. Enable it for the current session with `/vim`, or set `editorMode: vim` in your config to make it the default for every session. This gives Vim users modal editing (normal/insert modes, motions, and common commands) instead of the default single-line editing behaviour.
+
+**`/config` sidebar screen** *(v1.0.85+)*: The `/config` command now opens a dedicated sidebar configuration screen instead of a flat command-line prompt, making it easier to browse and change settings like model, effort level, and editor mode without memorising subcommand syntax.
 
 ### Shell Completion
 
