@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-24
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -86,11 +86,21 @@ For a hands-on guide to building canvases with `/create-canvas`, see [Working wi
 
 **Customize** *(v1.1.13+)* is a single place in the Copilot app to browse and manage everything that extends your agents: plugins, skills, MCP servers, and canvases. Instead of hunting through separate settings pages, open **Customize** to:
 
-- Browse **Featured** integrations (for example Azure DevOps or Figma) and install them with one click
+- Browse **Featured** integrations (for example Azure DevOps, Figma, or Sentry) and install them with one click
 - See what's already **Installed**, with consistent icons and source labels across plugin, skill, MCP server, canvas, and connector types
 - Create, edit, or remove your own **personal skills** directly in the app, without hand-authoring a `SKILL.md` file
 
+> **New (v1.1.23+)**: A featured **Sentry canvas** is available in Customize, letting you install and open it to triage live Sentry issues directly inside a session.
+
 This makes Customize a good starting point if you want to extend the app's capabilities but don't need the full `copilot plugin` CLI workflow described in [Installing and Using Plugins](../installing-and-using-plugins/).
+
+### Local Sandbox for Agent Commands
+
+*(v1.1.23+)* A new project setting and `/sandbox` command let you run the agent's shell commands in a local sandbox restricted to the current session's workspace. This gives you an extra layer of isolation for the commands an agent runs on your machine, similar to the sandbox behavior available in Copilot CLI (see [Copilot Configuration Basics](../copilot-configuration-basics/)).
+
+### Restarting Chat Sessions
+
+*(v1.1.23+)* Use the **`/restart-session`** command to restart a chat or side chat conversation while preserving its history — useful when a conversation gets into a confused state but you don't want to lose the context that led there.
 
 ### Agent Merge
 
