@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-09-25
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -457,6 +457,8 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
+**Auto routing startup defaults (v1.0.87+)**: Administrators can now configure a **user default** and a **managed default** for the Auto routing tier — the reasoning-effort-like tier Auto uses when routing a request. The managed default supports both a **strict** policy (users cannot override it) and a **user-overridable** policy (users can change it, but it resets to the organization's default for new sessions). This gives organizations a way to standardize on a cost/quality tradeoff for Auto mode across a team while still allowing individual flexibility where appropriate.
+
 **Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **Claude Fable 5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
 
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
@@ -569,6 +571,8 @@ The `/fork` command (v1.0.45+) copies the current session into a **new independe
 
 After forking, the new session is immediately active. Both sessions share the same history up to the fork point but accumulate changes independently from that moment forward. Use `/fork` to experiment with a risky refactor without abandoning your current working session. Since v1.0.47, forked sessions display their **origin session** name in the sessions dialog, making it easy to trace which session a fork came from.
 
+> **Fork during an active turn (v1.0.88+)**: You can now run `/fork` while the agent is still working on a response, instead of waiting for the turn to finish. This lets you branch off to try an alternative approach the moment you decide the current turn isn't going where you want, without losing the in-progress state of the original session.
+
 The `/cd` command changes the working directory for the current session. Since v1.0.65, the working directory **persists when you resume a session** — if you restart the CLI and resume, you return to the same directory automatically. Changing directory also triggers discovery of custom agents in the new location, so switching to a different project loads its agents without a restart:
 
 ```
@@ -604,6 +608,8 @@ Unlike `/worktree` (which keeps the current conversation), `/new-worktree` is th
 ```
 /worktree new my-feature-branch
 ```
+
+**`worktreePathTemplate` setting (v1.0.87+)**: Controls *where* `/worktree`, `/move`, `/new-worktree`, and the `--worktree` startup flag create new worktrees. Set a template such as `~/src/worktrees/{repo}/{branch}` in `/settings`, using the placeholders `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Leaving it unset keeps the previous default layout — a `<repo>.worktrees/` folder next to the repository, with slashes in the branch name flattened to dashes. This is useful for keeping worktrees out of the repository's parent directory, for example to centralize them alongside other tooling or exclude them from a backup path.
 
 The `/every` command (also available as `/loop` since v1.0.64) schedules a recurring prompt to run automatically at a specified interval. The companion `/after` command runs a prompt once after a specified delay. Both are useful for self-paced automation — polling for results, periodically summarizing progress, or triggering other slash commands on a timer:
 
