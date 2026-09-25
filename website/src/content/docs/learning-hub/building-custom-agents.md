@@ -3,7 +3,7 @@ title: 'Building Custom Agents'
 description: 'Learn how to create specialized GitHub Copilot agents with custom personas, tool integrations, and domain expertise.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-25
 estimatedReadingTime: '10 minutes'
 tags:
   - agents
@@ -86,6 +86,8 @@ tools: ['codebase', 'terminal', 'github']
 
 **reasoningEffort** *(v1.0.66+)*: Override the reasoning effort level for this agent. Accepted values are `low`, `medium`, and `high`. This lets you pin specific agents to a cost/quality tradeoff regardless of the user's global setting — for example, a quick code-formatting agent can use `low` effort, while a security reviewer uses `high`:
 
+> **Applies as soon as the agent is selected (Copilot CLI v1.0.88+)**: In the CLI, an agent's `reasoning-effort` (kebab-case in CLI frontmatter) now takes effect the moment you select the agent, rather than only when its associated model is also selected. An explicit `--reasoning-effort` flag on the command line still overrides it, and if the currently selected model doesn't support the requested level, the CLI reports that and leaves the level unapplied instead of silently ignoring it.
+
 ```yaml
 ---
 name: 'Security Reviewer'
@@ -107,6 +109,20 @@ tools: ['codebase', 'terminal', 'github']
 | `edit` | Modify files in the workspace |
 
 For MCP server tools, reference them by server name (e.g., `postgres`, `docker`). See [Understanding MCP Servers](../understanding-mcp-servers/) for details.
+
+**include-custom-instructions** *(Copilot CLI v1.0.86+)*: By default, custom agents in the CLI run with their own persona and do not automatically inherit repository instruction files. Set `include-custom-instructions: true` in the frontmatter to have the agent also load `AGENTS.md`, `.github/copilot-instructions.md`, and `CLAUDE.md` from the repository, layering the team's shared conventions on top of the agent's own persona:
+
+```yaml
+---
+name: 'API Design Reviewer'
+description: 'Reviews API designs for consistency, RESTful patterns, and team conventions'
+model: Claude Sonnet 4
+include-custom-instructions: true
+tools: ['codebase', 'github']
+---
+```
+
+This is useful when an agent's persona should still respect house style rules (naming conventions, testing requirements, etc.) documented at the repository level, rather than relying solely on instructions baked into the agent file itself.
 
 ### Agent Instructions
 
