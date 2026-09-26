@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-09-26
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -431,8 +431,14 @@ CLI settings use **camelCase** naming. Key settings added in recent releases:
 | `stayInAutopilot` | Keep the CLI in autopilot mode after an autopilot task completes, instead of returning to interactive mode (v1.0.69+) |
 | `defaultMode` | Startup mode for new interactive sessions (e.g., `interactive`, `autopilot`, `plan`) (v1.0.81+) |
 | `defaultPermissionMode` | Default approval behaviour for new interactive sessions, independent from `defaultMode` (v1.0.81+) |
+| `editorMode` | Set to `vim` for modal (Vim-style) editing in the composer, with the current mode shown as you type (v1.0.85+) |
+| `worktreePathTemplate` | Controls where `/worktree`, `/move`, `/new`, and `--worktree` create worktrees, e.g. `~/src/worktrees/{repo}/{branch}` using `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}` placeholders. Unset keeps the default `<repo>.worktrees/` layout (v1.0.87+) |
 
 > **Note**: Older snake_case names (e.g., `include_gitignored`, `auto_updates_channel`) are still accepted for backward compatibility, but camelCase is now the preferred format.
+
+> **Vim mode for everyone (v1.0.85+)**: Modal editing is now available to all users. Turn it on with `/vim` or by setting `editorMode` to `vim` in your configuration.
+
+> **Sidebar configuration screen (v1.0.85+)**: Run `/config` to open a sidebar configuration screen directly in the CLI, making it easier to review and change settings without leaving your session.
 
 > **Session restore after a crash (v1.0.81+)**: If the CLI is interrupted unexpectedly — a crash or a machine restart — startup now offers to restore any sessions that were still open, so you don't have to reopen each terminal by hand.
 
@@ -457,7 +463,7 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
-**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **Claude Fable 5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
+**Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), **Claude Fable 5.1** (v1.0.83+), and **GPT-6 Astra** (v1.0.85+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
 
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
@@ -604,6 +610,8 @@ Unlike `/worktree` (which keeps the current conversation), `/new-worktree` is th
 ```
 /worktree new my-feature-branch
 ```
+
+**Custom worktree locations** *(v1.0.87+)*: Set `worktreePathTemplate` to control where `/worktree`, `/move`, `/new`, and the `--worktree` flag create worktrees, for example `~/src/worktrees/{repo}/{branch}`. Supported placeholders are `{repoPath}`, `{repo}`, `{branch}`, and `{branchSlug}`. Leave it unset to keep the default `<repo>.worktrees/` layout, where slashes in the branch name are flattened to dashes.
 
 The `/every` command (also available as `/loop` since v1.0.64) schedules a recurring prompt to run automatically at a specified interval. The companion `/after` command runs a prompt once after a specified delay. Both are useful for self-paced automation — polling for results, periodically summarizing progress, or triggering other slash commands on a timer:
 
