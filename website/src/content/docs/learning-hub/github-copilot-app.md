@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-02
+lastUpdated: 2026-09-27
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -92,6 +92,12 @@ For a hands-on guide to building canvases with `/create-canvas`, see [Working wi
 
 This makes Customize a good starting point if you want to extend the app's capabilities but don't need the full `copilot plugin` CLI workflow described in [Installing and Using Plugins](../installing-and-using-plugins/).
 
+Customize also features a curated **Sentry canvas** *(v1.1.23+)* that you can install and open directly to triage live Sentry issues without leaving the app.
+
+### Local Sandbox for Agent Commands
+
+*(v1.1.23+)* A project setting and `/sandbox` command let you run the agent's shell commands in a local sandbox that restricts filesystem access to the current session's workspace — mirroring the sandboxing model already available in Copilot CLI. This adds a layer of protection against a misbehaving or misled agent touching files outside the project it's working on.
+
 ### Agent Merge
 
 **Agent Merge** is a feature that can carry your pull requests through the entire workflow:
@@ -166,6 +172,8 @@ Once installed, you can create a session by:
 3. **From your inbox**: The app syncs your GitHub inbox—click an issue and start a session for it
 
 Each session runs in its own worktree with its own isolated environment. You can run multiple sessions in parallel.
+
+> **Note**: Session creation menus and project pickers refer to a plain conversation as **Chat** *(v1.1.21+)*, previously labeled "Start from scratch." Generated artifacts like Markdown files also open in the **Files** tab alongside repository files *(v1.1.21+)*, with a switcher between the two and an option to promote a generated artifact into the repository.
 
 ### Launching Sessions from the Terminal with Deep Links
 
