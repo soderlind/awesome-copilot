@@ -96,6 +96,10 @@ tools: ['codebase', 'terminal', 'github']
 ---
 ```
 
+**include-custom-instructions** *(v1.0.86+)*: Set to `true` to let the agent also load repository instruction files (`AGENTS.md`, `copilot-instructions.md`, `CLAUDE.md`). Agents do not read them by default.
+
+**reasoning-effort** *(v1.0.88+)*: The agent's reasoning effort now applies whenever the agent is selected, not only its model. An explicit `--reasoning-effort` flag still wins, and a level the selected model doesn't offer is reported and left unapplied.
+
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 
 | Tool | Purpose |
