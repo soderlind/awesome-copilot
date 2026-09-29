@@ -459,6 +459,8 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **Claude Fable 5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
 
+**Auto routing tier** *(v1.0.87+)*: Auto suggests a routing tier that you can switch with a shortcut or click, and (v1.0.89+) it asks for quick feedback after you switch away to a manually selected model. Users and organizations can set startup defaults for the tier; organization policy can be strict or user-overridable. Newer models such as Claude Opus 5.5 and GPT-6 Sol/Luna appear in the picker when available (v1.0.89+).
+
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
@@ -792,6 +794,12 @@ gh copilot --effort high "Refactor the authentication module"
 ```
 
 Accepted values are `low`, `medium`, and `high`. You can also set a default via the `effortLevel` config setting.
+
+### Worktree Location and Plugin Management
+
+The `worktreePathTemplate` setting (v1.0.87+) controls where `/worktree`, `/move`, `/new` and `--worktree` create worktrees, for example `~/src/worktrees/{repo}/{branch}`. Supported placeholders are `{repoPath}`, `{repo}`, `{branch}` and `{branchSlug}`.
+
+Since v1.0.85, `copilot plugin`, `copilot mcp` and `copilot skill` each have `enable` and `disable` subcommands, and `copilot plugin list` supports `--json`. Use `copilot instruction list` and `copilot lsp list` to see loaded instructions and LSP servers. Directly installed plugins can also be disabled and re-enabled (v1.0.89+).
 
 ### CLI Startup Flags
 
