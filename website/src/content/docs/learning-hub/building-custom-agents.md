@@ -3,7 +3,7 @@ title: 'Building Custom Agents'
 description: 'Learn how to create specialized GitHub Copilot agents with custom personas, tool integrations, and domain expertise.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-05
+lastUpdated: 2026-09-30
 estimatedReadingTime: '10 minutes'
 tags:
   - agents
@@ -95,6 +95,8 @@ reasoningEffort: high
 tools: ['codebase', 'terminal', 'github']
 ---
 ```
+
+*(v1.0.88+)* A custom agent's reasoning effort now applies as soon as the agent is selected, alongside its model. An explicit `--reasoning-effort` flag still wins, and a level the selected model does not offer is reported and left unapplied.
 
 **tools** (recommended): An array of built-in tools and MCP servers the agent can access. Common tools include:
 

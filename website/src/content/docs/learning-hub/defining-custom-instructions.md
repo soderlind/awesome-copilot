@@ -3,7 +3,7 @@ title: 'Defining Custom Instructions'
 description: 'Learn how to create persistent, context-aware instructions that guide GitHub Copilot automatically across your codebase.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-07-01
+lastUpdated: 2026-09-30
 estimatedReadingTime: '8 minutes'
 tags:
   - instructions
@@ -141,6 +141,10 @@ applyTo: '**'
 
 **Expected Result**:
 When you work on a file matching the pattern, Copilot incorporates that instruction's context into suggestions and chat responses automatically.
+
+## Claude Code Rule Files
+
+*(v1.0.89+)* Copilot CLI also reads Claude Code rule files in `.claude/rules/` as custom instructions, so teams that share a repository with Claude Code do not need to duplicate their rules.
 
 ## Composing Instructions with @-style Imports
 
