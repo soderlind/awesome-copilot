@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-09-30
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -248,6 +248,8 @@ Run `/plugin` (or `copilot plugin list` in non-interactive mode) to see **enable
 ```
 
 This opens an interactive list where each installed plugin and its components are shown with a toggle. Disabling a component hides it from Copilot without removing it from disk — useful for temporarily deactivating a hook that is too noisy, or turning off a plugin's instructions when working on a different type of project. Re-enable the component at any time from the same `/plugin` menu.
+
+*(v1.0.89+)* Plugins installed directly (for example from a repository or URL) can also be disabled and re-enabled. A plugin recorded as disabled no longer loads; re-enable it with `copilot plugin enable`.
 
 *(v1.0.81+)* `/plugin` also flags installed plugins and marketplaces that have a newer version available upstream, and offers an **Update** action to pull the latest version directly from the dashboard.
 
