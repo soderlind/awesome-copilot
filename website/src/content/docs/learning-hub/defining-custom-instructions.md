@@ -35,6 +35,7 @@ Custom instructions are markdown files (`.instructions.md`) that contain:
 - They persist across all chat sessions and inline completions
 - They can be scoped globally, per language, or per directory using glob patterns
 - They help Copilot understand your codebase's unique context without manual prompting
+- Copilot CLI also reads Claude Code rule files in `.claude/rules` as custom instructions *(v1.0.89+)*
 
 ### How Instructions Differ from Other Customizations
 
