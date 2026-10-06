@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-10-06
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -846,6 +846,12 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 > **Breaking change — sandbox network isolation (v1.0.83+)**: On macOS and Linux, sandboxed commands can no longer reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also now requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes now restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
+
+**`copilot config` subcommands** *(v1.0.92+)*: List, read, set, and remove CLI settings directly from the shell without opening `/settings`. Run `copilot config --help` for the exact subcommands.
+
+**Sandbox proxy CA management** *(v1.0.91+)*: `copilot sandbox ca` commands check, create, trust, rotate, and remove the proxy CA trust used by the sandbox, including unattended setup on Windows. The former `/sandbox ca install` is now split into `create` and `trust`. In v1.0.92+, these commands respect `--config-dir`. Also in v1.0.92, sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it.
+
+**Environment picker** *(v1.0.92+)*: Press `Ctrl+E` before starting a conversation to switch between local and cloud runs.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 
