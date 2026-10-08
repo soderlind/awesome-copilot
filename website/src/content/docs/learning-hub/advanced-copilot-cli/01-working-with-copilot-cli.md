@@ -150,6 +150,11 @@ Copilot offers many [options to control permissions][permissions-docs], includin
 | — | `--allow-all-tools` | Auto-approve every tool call (required for programmatic / scripted runs), but paths must still be approved. |
 | — | `--allow-all-paths` | Skip path verification and allow access to any file location. |
 | — | `--allow-url=URL` / `--deny-url=URL` | Allow or block specific URLs/domains for `web_fetch` and shell network calls. |
+| `/sandbox` | `--sandbox` | Run shell commands inside a sandbox (available to all users as of v1.0.93). Use `copilot sandbox ca` to check, create, trust, rotate, or remove the proxy CA trust the sandbox relies on. |
+| — | `--mcp-github-auth` | Scope GitHub account authentication to approved MCP server origins. |
+
+> [!TIP]
+> Settings can also be managed from the command line with `copilot config` subcommands (list, read, set, and remove). User settings are read only from `~/.copilot/settings.json`; keys placed in `~/.copilot/config.json` are ignored. MCP server configuration changes now apply between turns without restarting the session.
 
 > [!WARNING]
 > Enabling all tools (commonly referred to as **YOLO mode**) gives Copilot unrestricted ability to read, modify, and execute files, run shell commands, and call out to MCP servers without asking. A misinterpreted prompt or a prompt-injection attack via fetched content can result in data loss, leaked secrets, or destructive commands. Only use YOLO mode in [trusted, sandboxed environments][risk-mitigation] such as a container or disposable VM, and never in a directory containing credentials or unreviewed code.
