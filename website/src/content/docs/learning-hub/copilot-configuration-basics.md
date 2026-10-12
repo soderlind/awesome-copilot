@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-10-11
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -846,6 +846,18 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 > **Breaking change — sandbox network isolation (v1.0.83+)**: On macOS and Linux, sandboxed commands can no longer reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also now requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes now restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
+
+**`copilot config` subcommands** *(v1.0.92+)*: Use `copilot config` to list, read, set, and remove settings from the command line instead of editing `settings.json` by hand. Since v1.0.95 it also supports the sandbox credential `injectHosts` keys, with key completion in Bash, Zsh, and Fish.
+
+> **Settings file location (v1.0.93+)**: User settings are read only from `~/.copilot/settings.json`. User-setting keys left in `~/.copilot/config.json` are now ignored, so move any remaining settings across.
+
+**Command sandboxing for everyone** *(v1.0.93+)*: Command sandboxing is available to all users via `/sandbox` and `--sandbox`. Since v1.0.92, sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you explicitly configure it.
+
+**Environment picker and context tier** *(v1.0.92+/v1.0.93+)*: Press **Ctrl+E** before starting a conversation to choose between local and cloud runs. The `--context long_context` flag is honored at startup, and `/context` shows the accurate allowance. Since v1.0.95, `--context` also applies to new and resumed ACP sessions.
+
+**Enterprise controls** *(v1.0.93+)*: Managed settings can enforce domain boundaries for network requests with `permissions.limitTo`, and (v1.0.94+) can disable Assisted Permissions so sessions stay in Manual Approval mode.
+
+**Models** *(v1.0.93+)*: The model picker now prioritizes GPT-6.1 Sol, GPT-6 Astra/Luna, and Claude 5.5 models in its recommended list. Claude Haiku 5.5 was added in v1.0.94.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 
