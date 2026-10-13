@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-10-13
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -459,6 +459,8 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, **Grok 4.5** (v1.0.76+) from xAI, **Gemini 3.7 Flash** (v1.0.81+), and **Claude Fable 5.1** (v1.0.83+). **Grok 4.6** (v1.0.81+) also gains support for the `xhigh` reasoning effort level, one step above `high`, for the most demanding reasoning tasks. The `/model picker` also periodically retires older models no longer worth recommending — a recent cleanup removed several deprecated Claude and Gemini entries (v1.0.83+), so don't be surprised if a model you previously pinned disappears from the list.
 
+**Newer models** *(v1.0.93–v1.0.94)*: **Claude Haiku 5.5** is now selectable (and available in `--model` completions), and the recommended list prioritizes GPT-6.1 Sol, GPT-6 Astra/Luna, and Claude 5.5 models. Model IDs in `/model` and `/config model` are case-insensitive and saved in canonical form (v1.0.96).
+
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
@@ -846,6 +848,14 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 > **Breaking change — sandbox network isolation (v1.0.83+)**: On macOS and Linux, sandboxed commands can no longer reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also now requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes now restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
+
+**Sandbox availability and controls** *(v1.0.92–v1.0.96)*: Command sandboxing is now available to all users via `/sandbox` and `--sandbox` (v1.0.93). Sandboxed shells withhold the ambient `GITHUB_TOKEN` unless you configure it explicitly (v1.0.92), `/add-dir` grants sandbox access to added directories for the current session (v1.0.96), and `copilot config` supports credential `injectHosts` keys (v1.0.95). The interactive sandbox settings also suggest environment secrets to mask and let you add masking hosts before saving (v1.0.96). Enterprise admins can enforce domain boundaries with `permissions.limitTo` (v1.0.93).
+
+**`copilot config` subcommands** *(v1.0.92+)*: List, read, set, and remove settings from the shell with `copilot config`. As of v1.0.93, user settings are read only from `~/.copilot/settings.json`; user-setting keys left in `~/.copilot/config.json` are ignored, so migrate them.
+
+**Permission decisions** *(v1.0.94+)*: Managed policy can disable Assisted Permissions and keep sessions in Manual Approval mode, and the timeline (v1.0.96) shows whether you, Assisted Permissions, policy, or the unattended fallback made each permission decision.
+
+**Cloud environment picker** *(v1.0.92+)*: Press **Ctrl+E** before starting a conversation to switch between local and cloud runs.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 
