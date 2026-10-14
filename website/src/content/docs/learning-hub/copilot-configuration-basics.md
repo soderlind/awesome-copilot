@@ -693,6 +693,8 @@ The `/ask` command lets you ask a quick question without affecting your conversa
 /ask What does the `retry` utility in src/utils do?
 ```
 
+In v1.0.98+, press **Ctrl+E** to expand a long `/ask` answer, **Ctrl+Y** to copy the entire answer, and run `/ask` or `/btw` with no question to reopen the last completed answer.
+
 The `/refine` command *(v1.0.70+)* rewrites a rough, stream-of-consciousness prompt into a clear, structured one before sending it to the agent:
 
 ```
