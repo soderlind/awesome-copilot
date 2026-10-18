@@ -163,6 +163,8 @@ The harness loads hooks from four sources, in order. Hooks from all sources for 
 3. **Repository hooks:** `.github/hooks/*.json`. Checked into source control so every team member gets them automatically on clone. This is also the **only** source the cloud agent loads since user files and plugins do not exist in the cloud sandbox.
 4. **Plugin hooks:** Declared inside each installed Copilot CLI plugin's own directory and loaded automatically alongside other sources when a plugin is installed.
 
+> **Agent-scoped hooks** *(v1.0.97+)*: Custom agents can also declare hooks directly in their own definition, so the hooks run only while that agent is active.
+
 Every hook file must declare `"version": 1` at the top level:
 
 ```json
