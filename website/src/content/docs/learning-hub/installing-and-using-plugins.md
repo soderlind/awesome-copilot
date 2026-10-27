@@ -140,6 +140,8 @@ Or from a local path:
 copilot plugin marketplace add /path/to/local-marketplace
 ```
 
+Marketplaces can also declare plugins using `git-subdir` sources (a plugin living in a subdirectory of a git repository) and accept long plugin descriptions *(v1.0.102+)*.
+
 ### Sharing Marketplace Registrations Across a Team
 
 To automatically register an additional marketplace for everyone working in a repository, add an `extraKnownMarketplaces` entry to your `.github/copilot-settings.json` (or `config.json`):
