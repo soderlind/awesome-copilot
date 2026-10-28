@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-28
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -98,6 +98,8 @@ Plugins are collected in **marketplaces** — registries you can browse and inst
 - **`awesome-copilot`** — Community-contributed plugins from this repository
 
 ### Browsing in Copilot CLI
+
+Marketplaces can also point at a subdirectory of a git repository using a `git-subdir` source *(v1.0.102+)*, and long plugin descriptions are now accepted.
 
 List your registered marketplaces:
 
