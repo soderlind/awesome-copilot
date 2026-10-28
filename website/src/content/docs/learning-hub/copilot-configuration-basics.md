@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-10-28
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -827,6 +827,10 @@ copilot --autopilot --max-autopilot-continues 10 "Refactor the authentication mo
 ```
 
 Set it higher for long-running tasks, or lower for tasks where you want more frequent checkpoints. Setting it to `0` disables automatic continuation entirely.
+
+**Assisted Permissions** *(available without experimental mode as of v1.0.104)*: Assisted Permissions lets Copilot help decide whether to approve tool and shell actions instead of prompting for every one. Use the `assistedApprovalInstructions` setting *(v1.0.101+)* to give it guidance about what your team considers safe to confirm. Extension capability requests are not covered by Assisted Permissions and always require explicit approval.
+
+**ACP sessions and sandbox** *(v1.0.103+)*: ACP sessions honor your saved sandbox settings and the `--sandbox`/`--no-sandbox` flags, including when a session is resumed. Sandboxed network traffic also honors `NO_PROXY` and `ALL_PROXY` *(v1.0.102+)*.
 
 The `--sandbox` and `--no-sandbox` flags *(v1.0.70+)* turn the OS-level shell sandbox on or off for the current session only, without permanently changing your saved sandbox setting. This is useful with `-p` (prompt mode) when you need to temporarily adjust sandbox behavior for a specific automated task:
 
