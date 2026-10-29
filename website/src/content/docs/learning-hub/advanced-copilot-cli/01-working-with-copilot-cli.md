@@ -151,6 +151,9 @@ Copilot offers many [options to control permissions][permissions-docs], includin
 | — | `--allow-all-paths` | Skip path verification and allow access to any file location. |
 | — | `--allow-url=URL` / `--deny-url=URL` | Allow or block specific URLs/domains for `web_fetch` and shell network calls. |
 
+> [!TIP]
+> **Assisted Permissions** can help review approval requests for you. As of Copilot CLI 1.0.104 it is available without enabling experimental mode, and the `assistedApprovalInstructions` setting (added in 1.0.101) lets you give it guidance on how to make confirmation decisions. Check the [CLI changelog][cli-changelog] for current behavior.
+
 > [!WARNING]
 > Enabling all tools (commonly referred to as **YOLO mode**) gives Copilot unrestricted ability to read, modify, and execute files, run shell commands, and call out to MCP servers without asking. A misinterpreted prompt or a prompt-injection attack via fetched content can result in data loss, leaked secrets, or destructive commands. Only use YOLO mode in [trusted, sandboxed environments][risk-mitigation] such as a container or disposable VM, and never in a directory containing credentials or unreviewed code.
 
@@ -322,3 +325,4 @@ Next, you'll **build the AI infrastructure** — codify what you just documented
 [session-docs]: https://docs.github.com/copilot/how-tos/copilot-cli/use-copilot-cli/overview#resume-an-interactive-session
 [session-sync]: https://docs.github.com/copilot/how-tos/copilot-cli/use-copilot-cli/chronicle
 [risk-mitigation]: https://docs.github.com/copilot/concepts/agents/copilot-cli/about-copilot-cli#risk-mitigation
+[cli-changelog]: https://github.com/github/copilot-cli/blob/main/changelog.md
