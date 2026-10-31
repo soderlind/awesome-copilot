@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-01
+lastUpdated: 2026-10-31
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -172,6 +172,16 @@ With this in place, team members automatically get the `my-org-plugins` marketpl
 ```
 
 This is useful for internal marketplaces where you want every team member to always be running the latest published plugin versions.
+
+### Installing from GitHub Install Links and Subdirectory Sources
+
+*(v1.0.100+)* You can install verified skills and plugins directly from a GitHub install link:
+
+```bash
+copilot plugin install "ghapp://air/install?..."
+```
+
+*(v1.0.102+)* Plugin marketplaces also accept `git-subdir` sources (a plugin living in a subdirectory of a git repository) and long plugin descriptions. *(v1.0.101+)* Team-assigned plugins can be installed from Team-defined GitHub marketplaces.
 
 ### Pinning a Marketplace to a Specific Commit
 

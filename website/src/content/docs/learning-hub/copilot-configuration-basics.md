@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-10-31
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -827,6 +827,19 @@ copilot --autopilot --max-autopilot-continues 10 "Refactor the authentication mo
 ```
 
 Set it higher for long-running tasks, or lower for tasks where you want more frequent checkpoints. Setting it to `0` disables automatic continuation entirely.
+
+**Autopilot and background tasks** *(v1.0.104+)*: Interactive and SDK Autopilot sessions now keep waiting for attached background tasks instead of stopping after `COPILOT_TASK_WAIT_TIMEOUT_SECONDS`. Non-interactive `-p --autopilot` runs still honor that timeout.
+
+**Assisted Permissions** *(v1.0.104+)*: Assisted Permissions no longer require experimental mode. Use the `assistedApprovalInstructions` setting *(v1.0.101+)* to guide how confirmation decisions are made.
+
+**Trusting folders and telemetry in automation**: Use `--trust-folder` *(v1.0.100+)* to trust the working folder for a one-off `-p` or piped-stdin run, and `--disable-client-telemetry` to turn off client telemetry uploads:
+
+```bash
+copilot --trust-folder -p "Summarize the open TODOs in this repo"
+copilot --disable-client-telemetry -p "Explain this stack trace"
+```
+
+Running `/share` with no arguments *(v1.0.100+)* opens a full-screen action menu for sharing the current session. The legacy `--remote`/`--no-remote` startup flags were retired in v1.0.103 in favor of clearer hosting/connection flags.
 
 The `--sandbox` and `--no-sandbox` flags *(v1.0.70+)* turn the OS-level shell sandbox on or off for the current session only, without permanently changing your saved sandbox setting. This is useful with `-p` (prompt mode) when you need to temporarily adjust sandbox behavior for a specific automated task:
 
