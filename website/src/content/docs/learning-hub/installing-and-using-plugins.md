@@ -213,6 +213,16 @@ Or from an interactive session:
 
 > **Deprecation notice**: Installing plugins directly from a GitHub repository URL, raw URL, or local file path (e.g., `copilot plugin install github/awesome-copilot`) is deprecated and will be removed in a future release. Use marketplace-based installation instead.
 
+### From a GitHub install link
+
+Copilot CLI can also install verified skills and plugins from a GitHub install link (added in CLI 1.0.100):
+
+```bash
+copilot plugin install "ghapp://air/install?..."
+```
+
+Plugin marketplaces can additionally be defined with `git-subdir` sources, so a marketplace can live in a subdirectory of a Git repository (CLI 1.0.102). See the [Copilot CLI changelog](https://github.com/github/copilot-cli/blob/main/changelog.md) for details.
+
 ### From VS Code
 
 Browse to the plugin via `@agentPlugins` in the Extensions search view or via **Chat: Plugins** in the Command Palette, then click **Install**.
