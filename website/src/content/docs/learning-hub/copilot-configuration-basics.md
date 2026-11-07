@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-11-07
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -491,6 +491,17 @@ The settings dialog supports search — type to filter settings by name. Changes
 ```
 
 These flags mirror the **Repo** and **Repo (local)** scope tabs available in the `/settings` dashboard (v1.0.71+), making it easier to manage per-repository vs. user-global configuration without ambiguity. In v1.0.71+, the `/settings` dashboard also shows **Repo** and **Repo (local)** tabs alongside the existing user-level view, giving you a unified place to see which settings are applied at each layer.
+
+*(v1.0.106+)* `/settings` opens the **unified dashboard for all users** and adds **global search** across both settings and local resources. The same release adds a **Fusion tier** setting to `copilot config`, and `copilot help config` now lists every setting in the catalog (for example `askUser`, `effortLevel`, `planModel`, `toolSearch` and `worktreeBaseRef`).
+
+Other recent CLI additions worth knowing:
+
+- `/code` *(v1.0.106+)* opens the current session in VS Code.
+- `COPILOT_SESSION_CWD` *(v1.0.106+)* is available when launching and expanding LSP and local MCP server configs.
+- A **Sandbox extensions** setting *(v1.0.106+)* runs extension processes inside the sandbox.
+- Plugin rules with `alwaysApply: false` *(v1.0.106+)* stay out of the prompt until you enable them in `/instructions`.
+- `/plugin marketplace remove` *(v1.0.106+)* refuses while one of the marketplace's plugins is enabled; pass `--force` to also clear that plugin.
+- `/agent` *(v1.0.106+)* shows each agent's selection ID when several agents share a display name.
 
 GitHub Copilot CLI has two commands for managing session state, with distinct behaviours:
 
