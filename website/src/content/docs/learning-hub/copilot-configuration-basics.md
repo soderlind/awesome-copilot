@@ -492,6 +492,8 @@ The settings dialog supports search — type to filter settings by name. Changes
 
 These flags mirror the **Repo** and **Repo (local)** scope tabs available in the `/settings` dashboard (v1.0.71+), making it easier to manage per-repository vs. user-global configuration without ambiguity. In v1.0.71+, the `/settings` dashboard also shows **Repo** and **Repo (local)** tabs alongside the existing user-level view, giving you a unified place to see which settings are applied at each layer.
 
+*(v1.0.107+)* `/settings` opens the unified dashboard for all users and adds **global search across settings and local resources**. The release also adds a **Sandbox extensions** setting (run extension processes inside the sandbox), a `/code` command that opens the current session in VS Code, and a `COPILOT_SESSION_CWD` environment variable for launching and expanding LSP and local MCP server configs.
+
 GitHub Copilot CLI has two commands for managing session state, with distinct behaviours:
 
 | Command | Behaviour |
