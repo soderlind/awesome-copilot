@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-11-09
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -146,6 +146,18 @@ Prevent Copilot from accessing specific files or directories.
 ```
 
 **Why it matters**: Exclude sensitive files, generated code, or dependencies from Copilot's context to improve suggestion relevance and protect confidential information.
+
+### Copilot CLI Settings
+
+Copilot CLI settings can be managed from the terminal rather than editing files by hand:
+
+- `/settings` opens a unified dashboard where you can browse and search settings and local resources.
+- `copilot config` lets you change settings from the command line, and `copilot help config` lists every available setting.
+- `/instructions` controls which instruction files and plugin rules are applied; plugin rules with `alwaysApply: false` stay out of the prompt until you enable them there.
+- `/code` opens the current session in VS Code.
+- Sandbox-related settings, such as running extension processes inside the sandbox, and the `COPILOT_SESSION_CWD` variable (for launching and expanding LSP and local MCP server configs) help with controlled environments.
+
+See the [Copilot CLI changelog](https://github.com/github/copilot-cli/blob/main/changelog.md) for the latest additions.
 
 ## Repository-Level Configuration
 
