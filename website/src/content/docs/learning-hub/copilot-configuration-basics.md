@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-11-10
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -686,6 +686,12 @@ Use `/diagnose` when a session is behaving unexpectedly — it inspects session 
 **Voice dictation** *(v1.0.81+)*: Press **Ctrl+Space** to toggle voice dictation on or off, letting you speak a prompt instead of typing it.
 
 **Worktree switch reliability (v1.0.82+)**: If you start typing a new message while `/worktree` or `/move` is preparing a worktree switch, that message is no longer dropped when the switch completes.
+
+**Open in VS Code** *(v1.0.106+)*: The `/code` command opens the current session in VS Code, so you can move from the terminal to the editor without losing context.
+
+**Repository indexing** *(v1.0.108+)*: The `/index` commands manage code indexing, and managed shared tgrep indexing is now enabled by default for eligible repositories to speed up code search.
+
+**Session @mentions** *(v1.0.106+)*: Opt-in session management tools let you @mention opted-in local sessions to reference other work. Use `COPILOT_SESSION_CWD` when launching or expanding LSP and local MCP server configs that need the session's working directory.
 
 The `/ask` command lets you ask a quick question without affecting your conversation history. The current session context is preserved, so you can use it for one-off lookups without derailing an ongoing task. Responses are rendered as full markdown, including tables and formatted links:
 
