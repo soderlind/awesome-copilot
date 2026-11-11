@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-11-11
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -232,6 +232,19 @@ In addition to model and effort settings, this file can also extend the URL, MCP
 **Why use this**: Pin a model when your team has agreed on the right cost/quality tradeoff for a project. Pin a high effort level for codebases where mistakes are expensive. Deny lists let you block specific MCP servers or URLs that aren't appropriate for a given project's security posture.
 
 > **Trust requirement**: The repository must be explicitly trusted by the user for these settings to take effect. This prevents untrusted repositories from changing your model or access restrictions without your knowledge.
+
+### Copilot CLI Sandbox and Session Settings
+
+Recent Copilot CLI releases (v1.0.107–v1.0.109) added several settings worth knowing about:
+
+- **Sandbox host rules**: `settings.json` host allow and deny rules for the sandbox now accept IPv4/IPv6 CIDR ranges.
+- **Sandbox extensions**: A setting runs extension processes inside the sandbox.
+- **`/settings` dashboard**: Opens a unified dashboard with global search across settings and local resources.
+- **`COPILOT_SESSION_CWD`**: Available when launching, and expanded inside LSP and local MCP server configs.
+- **`/index` commands**: Manage shared code indexing, which is enabled by default for eligible repositories.
+- **`/code`**: Opens the current session in VS Code.
+
+See the [Copilot CLI changelog](https://github.com/github/copilot-cli/blob/main/changelog.md) for details.
 
 ### Custom Agents
 
