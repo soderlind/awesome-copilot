@@ -725,6 +725,8 @@ The `/usage` command displays session metrics such as the number of tokens consu
 /limits predict
 ```
 
+**Credit limits cover sub-agents and `/compact`** *(v1.0.110+)*: Sub-agents now respect the session-wide AI credit limit set with `--max-ai-credits` (v1.0.112+), `/compact` stops once the limit is reached, and credits already used count toward the limit when you resume a session.
+
 The `/compact` command summarizes the conversation history to free up context window space while preserving the thread of the conversation. Use it when your context is getting full but you do not want to start a fresh session:
 
 ```
@@ -846,6 +848,8 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 > **Breaking change — sandbox network isolation (v1.0.83+)**: On macOS and Linux, sandboxed commands can no longer reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also now requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes now restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
+
+**Sandbox CIDR rules** *(v1.0.109+)*: Sandbox host allow and deny rules in settings accept IPv4 and IPv6 CIDR ranges (for example `10.0.0.0/8`). On macOS, sandbox host rules block direct TCP connections to local ports; localhost stays reachable only through the local proxy (`copilot help sandbox`).
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 

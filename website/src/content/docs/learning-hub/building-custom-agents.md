@@ -39,6 +39,7 @@ When a user selects a custom agent in VS Code or assigns it to an issue via the 
 - Agents can invoke tools, run commands, search codebases, and interact with MCP servers
 - Multiple agents can coexist in a repository, each serving different workflows
 - Agents are stored in `.github/agents/` and are shared with the entire team
+- In the CLI, agents added to `.github/agents/` during a session are picked up without reloading (v1.0.109+)
 
 ### How Agents Differ from Other Customizations
 
