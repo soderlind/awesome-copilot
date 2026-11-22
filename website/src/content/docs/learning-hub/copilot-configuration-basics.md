@@ -461,6 +461,8 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Model fallback lists** *(v1.0.83+)*: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
+**Custom provider models in `/model`** *(v1.0.115-2+)*: In local sessions, press **Ctrl+X** then **A** inside `/model` to add a custom provider model and optionally switch to it. You can also manage configured provider models directly from the picker.
+
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
 
 ```
@@ -846,6 +848,10 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **`worktreeBaseRef` setting** *(v1.0.79-8+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to starting from the remote default branch. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
 > **Breaking change — sandbox network isolation (v1.0.83+)**: On macOS and Linux, sandboxed commands can no longer reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also now requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes now restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
+
+**Sandbox policy updates** *(v1.0.115-2+)*: Windows sandbox package queries are now enabled by default; set `sandbox.userPolicy.capabilities` to `[]` to opt out. On macOS, `sandbox.userPolicy.seatbelt.extraMachLookups` allows specific Mach service lookups without enabling Keychain access. Run `/sandbox policy` to see the GitHub account sandboxed `gh` commands use, and to get guidance when MCP startup warnings are caused by sandbox network restrictions. Sandboxed commands also refuse to start when a denied-path glob matches more than 100 paths, so narrow the glob if you see that error.
+
+**Resumed-session credit limits** *(v1.0.115-2+)*: `--max-ai-credits` passed together with `--resume` or `--continue` now sets the resumed session's limit, even if the session already had one.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 
