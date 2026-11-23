@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-11-23
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -551,6 +551,10 @@ When you select a point to roll back to, `/rewind` presents a choice: roll back 
 
 Use `/rewind` when you want to branch off from a different point in the conversation, rather than just undoing the most recent turn.
 
+**Rewind accuracy** *(v1.0.111+)*: `/rewind` with **Conversation + files** no longer lists or reports as restored a file that later turns had already put back or deleted again.
+
+The `/usage` command shows premium request usage and an activity graph of the prompts you typed (sub-agent and autopilot prompts aren't counted). Since v1.0.111 the graph fits narrow terminals by showing fewer weeks.
+
 The `/undo` command reverts the last turn—including any file changes the agent made—letting you course-correct without manually undoing edits:
 
 ```
@@ -903,6 +907,16 @@ echo 'source ~/.copilot-completion.bash' >> ~/.bashrc
 ```
 
 > **Tip**: Reload your shell (`source ~/.bashrc` or open a new terminal) after adding the completion script for changes to take effect.
+
+### Enterprise-Managed Settings *(v1.0.111+)*
+
+Administrators can enforce CLI behavior through managed settings:
+
+- **Regex permission rules** *(v1.0.111)*: enterprise-managed Shell, Bash, and PowerShell permission rules now support regular expressions.
+- **Browser Use** *(v1.0.113)*: set `features.browserUse` to disable the built-in Browser Use capability, including in running sessions.
+- **Remote session creation** *(v1.0.111)*: launch a CLI host with `--host-allow-session-creation` to let remote clients create sessions for that launch only, without changing saved settings.
+
+Run `copilot help environment` to see the documented environment variables, such as `COPILOT_MCP_TOOL_CACHE`, which turns off the MCP tool snapshot cache for every server.
 
 ## Common Questions
 
