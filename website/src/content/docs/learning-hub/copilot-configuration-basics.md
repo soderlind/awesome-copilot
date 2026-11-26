@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-07
+lastUpdated: 2026-11-26
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -232,6 +232,10 @@ In addition to model and effort settings, this file can also extend the URL, MCP
 **Why use this**: Pin a model when your team has agreed on the right cost/quality tradeoff for a project. Pin a high effort level for codebases where mistakes are expensive. Deny lists let you block specific MCP servers or URLs that aren't appropriate for a given project's security posture.
 
 > **Trust requirement**: The repository must be explicitly trusted by the user for these settings to take effect. This prevents untrusted repositories from changing your model or access restrictions without your knowledge.
+
+### Setting Environment Variables with `env`
+
+*(v1.0.116+)* Use the `env` setting to define environment variables for every process Copilot CLI starts: shell commands, local LSP and MCP servers, hooks, and extensions. It works with or without the sandbox enabled. Workspace MCP servers in `.mcp.json` and `.github/mcp.json` are also now loaded when those files contain comments or trailing commas.
 
 ### Custom Agents
 
